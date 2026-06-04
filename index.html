@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GRE 500 语义包</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <aside class="sidebar" aria-label="语义分类">
+        <div class="brand-block">
+          <p class="eyebrow">GRE 语义记忆</p>
+          <h1>500 词语义包</h1>
+          <p class="intro">把“晦涩、削弱、阻碍、矛盾、赞扬”这些有倾向的词压成一组，看熟它们的气味。</p>
+        </div>
+
+        <div class="stats-row" aria-label="学习统计">
+          <div>
+            <strong id="totalWords">0</strong>
+            <span>词库</span>
+          </div>
+          <div>
+            <strong id="knownWords">0</strong>
+            <span>眼熟</span>
+          </div>
+          <div>
+            <strong id="reviewWords">0</strong>
+            <span>复看</span>
+          </div>
+        </div>
+        <button id="clearProgressBtn" class="clear-button" type="button">清空进度</button>
+
+        <label class="search-box">
+          <span>搜索</span>
+          <input id="searchInput" type="search" placeholder="abstruse / 晦涩 / 削弱" />
+        </label>
+
+        <div class="toolbar-group" aria-label="褒贬筛选">
+          <button class="pill active" data-valence="all" type="button">全部</button>
+          <button class="pill" data-valence="negative" type="button">负向</button>
+          <button class="pill" data-valence="positive" type="button">正向</button>
+          <button class="pill" data-valence="neutral" type="button">中性</button>
+        </div>
+
+        <nav id="packNav" class="pack-nav" aria-label="语义包列表"></nav>
+      </aside>
+
+      <section class="workspace">
+        <div class="topbar">
+          <div class="tabs" role="tablist" aria-label="学习模式">
+            <button class="tab active" data-view="browse" type="button">语义包</button>
+            <button class="tab" data-view="quiz" type="button">分类练习</button>
+            <button class="tab" data-view="import" type="button">扩展词库</button>
+          </div>
+          <button id="shuffleBtn" class="icon-button" type="button" title="随机抽一组">↻</button>
+        </div>
+
+        <section id="browseView" class="view active" aria-live="polite">
+          <div class="pack-header">
+            <div>
+              <p id="activeMeta" class="eyebrow">语义包</p>
+              <h2 id="activeTitle">全部词包</h2>
+            </div>
+            <div class="legend" aria-label="词性标记">
+              <span><i class="dot negative"></i>负向</span>
+              <span><i class="dot positive"></i>正向</span>
+              <span><i class="dot neutral"></i>中性</span>
+            </div>
+          </div>
+          <div id="wordGrid" class="word-grid"></div>
+        </section>
+
+        <section id="quizView" class="view" aria-live="polite">
+          <div class="practice-layout">
+            <article class="quiz-panel">
+              <p class="eyebrow">分类直觉</p>
+              <div class="quiz-word-row">
+                <h2 id="quizWord">abstruse</h2>
+                <button id="quizSpeakBtn" class="speak-button large" type="button" title="朗读当前单词">▶</button>
+              </div>
+              <p id="quizMeaning" class="quiz-meaning">晦涩难懂的</p>
+              <div id="quizOptions" class="quiz-options"></div>
+              <p id="quizFeedback" class="feedback"></p>
+              <button id="nextQuizBtn" class="primary-button" type="button">下一词</button>
+            </article>
+            <aside class="memory-panel">
+              <p class="eyebrow">同组线索</p>
+              <h3 id="quizPackTitle">晦涩难懂</h3>
+              <div id="neighborWords" class="neighbor-list"></div>
+            </aside>
+          </div>
+        </section>
+
+        <section id="importView" class="view">
+          <div class="import-panel">
+            <p class="eyebrow">CSV / JSON</p>
+            <h2>把你的 1000 词表贴进来</h2>
+            <p class="import-copy">CSV 列：word, meaning, pack, valence, note。导入后会保存在本机浏览器里。</p>
+            <textarea id="importText" spellcheck="false" placeholder="word,meaning,pack,valence,note&#10;abstruse,晦涩难懂的,晦涩难懂,negative,常形容文章或概念"></textarea>
+            <div class="import-actions">
+              <button id="importBtn" class="primary-button" type="button">导入</button>
+              <button id="resetBtn" class="ghost-button" type="button">恢复内置词库</button>
+            </div>
+            <p id="importStatus" class="feedback"></p>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
